@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 
+type BrutalistCardProps = {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+  accentClasses?: string;
+};
+
+type BrutalistButtonProps<T extends React.ElementType = "button"> = {
+  as?: T;
+  accentClasses?: string;
+  className?: string;
+  children: React.ReactNode;
+} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "className" | "children">;
+
 // --- Data ---
 const userProfile = {
   name: "Majid Alee",
@@ -85,7 +99,7 @@ const BrutalistCard = ({
   children,
   className = "",
   accentClasses = "border-black shadow-[8px_8px_0px_0px_#000]",
-}) => (
+}: BrutalistCardProps) => (
   <div className={`bg-white border-4 ${accentClasses} ${className}`}>
     <div className={`border-b-4 ${accentClasses.split(" ")[0]} p-4`}>
       <h3
@@ -104,22 +118,24 @@ const BrutalistCard = ({
  * BrutalistButton: A reusable button with a thick border,
  * hard shadow, and a "press" animation on hover/active.
  */
-const BrutalistButton = ({
+const BrutalistButton = <T extends React.ElementType = "button">({
   children,
-  as: Component = "button",
+  as,
   className = "",
-  accentClasses = "border-black shadow-[4px_4px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000] text-black hover:bg-black hover:text-white",
+  accentClasses = "border-black shadow-[4px_4px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000]",
   ...props
-}) => {
+}: BrutalistButtonProps<T>) => {
+  const Component = as ?? "button";
   return (
     <Component
-      className={`bg-white border-4 px-6 py-3 font-bold uppercase flex items-center justify-center gap-3
+      className={`bg-white text-black border-4 px-6 py-3 font-bold uppercase inline-flex items-center justify-center gap-2
                   ${accentClasses}
+                  hover:bg-black hover:text-black
                   hover:translate-x-[2px] hover:translate-y-[2px]
                   active:shadow-none active:translate-x-[4px] active:translate-y-[4px]
                   transition-all duration-100 ease-out
                   ${className}`}
-      {...props}
+      {...(props as Record<string, unknown>)}
     >
       {children}
     </Component>
@@ -129,7 +145,7 @@ const BrutalistButton = ({
 // --- Section Components ---
 
 const Header = () => {
-  const scrollto = (id) => {
+  const scrollto = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -284,7 +300,7 @@ const ContactSection = () => (
           <BrutalistButton
             as="a"
             href="mailto:aleemii270@gmail.com"
-            className="flex-1 text-center"
+            className="flex-1 text-center "
             // Reverted: Removed emerald accent classes
           >
             <Mail className="h-5 w-5" aria-hidden="true" />
