@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Majid Ali</title>
+<meta name="description" content="Majid Ali — backend, cloud and AI/LLM tooling engineer in Karachi. Full background, engineering timeline, working stack and education.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23081122'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23F5FE90' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"></span>Majid Ali <span>/ engineer</span></a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="work/index.html">Work</a>
+    <a href="about.html" aria-current="page">About</a>
+    <a href="stack.html">Stack</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="nav__cta">
+    <a class="btn" href="assets/Majid_Ali_Resume.pdf">Résumé<span class="btn__dot" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="phead">
+  <div class="shell">
+    <p class="eyebrow"><i>A</i> About</p>
+    <h1 class="h1">Five years of making other people's systems someone's responsibility.</h1>
+    <p class="lead">
+      I'm Majid Ali — a backend and cloud engineer in Karachi. I started as a full-stack
+      developer, became a team lead, spent a year as a project manager talking to
+      enterprise partners, and now run technical operations for a multi-tenant
+      healthcare platform. Alongside that I've run my own consultancy since 2022.
+    </p>
+  </div>
+</section>
+
+<!-- narrative -->
+<section class="sec sec--tight">
+  <div class="shell">
+    <div class="split">
+      <p class="split__label" data-reveal>How I got here</p>
+      <div class="prose" data-reveal>
+        <p>
+          The through-line in my work is <strong>ownership of the unglamorous half</strong>.
+          Most of what I've been trusted with has been the part of a system that already
+          exists, already has users, and has started to hurt: a cloud bill that outgrew
+          its architecture, a data warehouse that costs more than it earns, a platform
+          that needs to move clouds without going down, a database that only one person
+          can answer questions from.
+        </p>
+        <p>
+          That's shaped how I think. I'm sceptical of rewrites, biased toward migrations
+          you can run incrementally under live traffic, and I read cost and latency
+          graphs as architecture documents — they tell you where the design disagrees
+          with reality more honestly than a diagram does.
+        </p>
+        <p>
+          The AI work grew out of the same instinct rather than being a pivot. An MCP
+          server is an API design problem: what can this caller reach, what must it
+          discover first, what can it never touch. A multi-agent graph is a distributed
+          systems problem with a probabilistic component. The interesting decisions are
+          in the boundaries, and boundaries are the thing I've spent five years on.
+        </p>
+        <p>
+          The year I spent as a project manager is the part of my background I'd
+          undersell least. Coordinating enterprise integrations with banking, insurance
+          and telecom partners taught me what a system looks like from outside the
+          engineering org — and how much of delivery is about being legible to people
+          who don't read code.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- timeline -->
+<section class="sec sec--grid">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>01</i> Experience</p>
+
+    <div class="tl">
+      <div class="tl__row is-now" data-reveal>
+        <p class="tl__when">Jun 2024 — present</p>
+        <div>
+          <h3 class="tl__role">Technical Operations Lead</h3>
+          <p class="tl__org">Sehat Kahani · Karachi</p>
+        </div>
+        <p class="tl__what">
+          Led a cross-cloud migration onto AWS Elastic Beanstalk while operating Azure in
+          parallel across blob storage, Cognito auth triggers and application monitoring.
+          Drove third-party penetration-test remediation across three production product
+          lines handling protected patient data. Built an MCP server exposing the
+          production database as LLM-callable tools. End-to-end ownership of the E-Clinic
+          product line, including investor and board-level technical representation.
+        </p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">~2022 — present<br><span style="opacity:.6">concurrent</span></p>
+        <div>
+          <h3 class="tl__role">Founder &amp; Technical Lead</h3>
+          <p class="tl__org">Codenetic</p>
+        </div>
+        <p class="tl__what">
+          A software consultancy delivering client products end to end — $200K+ earned
+          across 300+ applications built and 70+ published to the App Store and Google
+          Play. Work spans telehealth platforms, EdTech SaaS, offline-first field apps,
+          multi-agent AI systems and crypto wallet backends. Several were team
+          deliveries, and the project index says which.
+        </p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Sep 2023 — Jun 2024</p>
+        <div>
+          <h3 class="tl__role">Senior Project Manager</h3>
+          <p class="tl__org">Zetsol Technologies · Hyderabad</p>
+        </div>
+        <p class="tl__what">
+          Project manager for a corporate, clinical and retail expansion into Dubai.
+          Coordinated enterprise integrations with major banking, insurance and telecom
+          partners onto a multi-tenant healthcare platform, each running as a
+          white-labelled deployment with its own environment stack. Supervised the
+          mental-health and home-health-care product lines.
+        </p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Dec 2022 — Sep 2023</p>
+        <div>
+          <h3 class="tl__role">Backend &amp; DevOps Team Lead</h3>
+          <p class="tl__org">BitsPro · Karachi</p>
+        </div>
+        <p class="tl__what">
+          Led four engineers building an event-driven microservices warehouse management
+          system on AWS EKS and ECS/Fargate for Leafgistics. Owned the data-warehousing
+          layer through a Redshift → ClickHouse migration across three fulfilment
+          centres, delivered a compliance-grade multi-warehouse operations suite, and
+          built the CI/CD gates for the service fleet.
+        </p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Mar 2021 — Dec 2022</p>
+        <div>
+          <h3 class="tl__role">Full Stack Developer → Development Team Lead</h3>
+          <p class="tl__org">Zetsol Technologies · Hyderabad</p>
+        </div>
+        <p class="tl__what">
+          Built the WebRTC video and audio consultation engine for a national telemedicine
+          platform on a Koa2/TypeScript backend, plus the Angular operations console used
+          to run it. Owned CI/CD across five environments and three product lines. Then
+          the Azure infrastructure redesign that cut monthly cloud spend by roughly 88%.
+          Promoted to development team lead during this period.
+        </p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Jan 2021 — Mar 2021</p>
+        <div>
+          <h3 class="tl__role">Flutter Intern</h3>
+          <p class="tl__org">Storius International · Remote</p>
+        </div>
+        <p class="tl__what">
+          Contributed to a Flutter-based travel-guidance app as an intern. First
+          production codebase.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- track record -->
+<section class="sec sec--paper sec--grid" id="record">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>02</i> Track record</p>
+
+    <div class="split sec-intro">
+      <p class="split__label" data-reveal>Every number, with its receipt</p>
+      <h2 class="h3" data-reveal>Numbers are easy to write down. These come with where they happened and what my actual role was.</h2>
+    </div>
+
+    <div class="record">
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">~88<small>%</small></p>
+        <p class="record__what">Monthly Azure spend removed from a national telemedicine platform — roughly $12,000 down to $1,500, with the platform live throughout.</p>
+        <p class="record__where">Zetsol · 2021—2022<b>Individual contributor</b><a href="work/azure-cost-redesign.html">Case study →</a></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">4</p>
+        <p class="record__what">Backend engineers led, building an event-driven microservices warehouse management system on AWS EKS and Fargate for a US logistics operator.</p>
+        <p class="record__where">BitsPro · 2022—2023<b>Team lead</b><a href="work/leafgistics-wms.html">Case study →</a></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">7</p>
+        <p class="record__what">Specialised agents orchestrated behind an intent classifier in LangGraph, with a dedicated QA agent gating all generated output.</p>
+        <p class="record__where">Myaigi · via Codenetic<b>Architect</b><a href="work/myaigi-agents.html">Case study →</a></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">2<small> clouds</small></p>
+        <p class="record__what">Azure and AWS operated in parallel through a live migration onto Elastic Beanstalk — blob storage, Cognito auth triggers and monitoring spanning both.</p>
+        <p class="record__where">Sehat Kahani · 2024—<b>Technical operations lead</b></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">3<small> product lines</small></p>
+        <p class="record__what">Third-party penetration-test (VAPT) remediation driven across three production product lines of a platform handling protected patient data.</p>
+        <p class="record__where">Sehat Kahani · 2024—<b>Technical operations lead</b></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">70<small>+</small></p>
+        <p class="record__what">Applications published to the App Store and Google Play through my consultancy, out of 300+ built. Several were team deliveries, not solo work.</p>
+        <p class="record__where">Codenetic · 2022—<b>Founder</b></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">$200K<small>+</small></p>
+        <p class="record__what">Earned across client engagements delivered end to end through the consultancy I founded and still run alongside employment.</p>
+        <p class="record__where">Codenetic · 2022—<b>Founder</b></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">2,000<small>+</small></p>
+        <p class="record__what">Students served by a production financial-literacy EdTech platform delivered with a three-person team for a US charter school network.</p>
+        <p class="record__where">via Codenetic<b>Technical lead</b></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">3<small> sites</small></p>
+        <p class="record__what">Fulfilment centres served by a warehouse inventory search layer migrated off Amazon Redshift to ClickHouse — lower cost, columnar speed preserved.</p>
+        <p class="record__where">BitsPro · 2022—2023<b>Team lead</b></p>
+      </div>
+
+      <div class="record__row" data-reveal>
+        <p class="record__n">5<small> environments</small></p>
+        <p class="record__what">CI/CD pipelines owned across five environments spanning three product lines on a shared codebase, automating lint, test and deploy gates.</p>
+        <p class="record__where">Zetsol · 2021—2022<b>Individual contributor</b></p>
+      </div>
+
+    </div>
+
+    <p class="mono muted" style="margin-top:1.5rem" data-reveal>
+      Nothing here is rounded up. Where ownership was shared, the role column says so.
+    </p>
+  </div>
+</section>
+
+<!-- education -->
+<section class="sec sec--paper sec--tight">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>03</i> Education</p>
+    <div class="tl">
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Jul 2022 — present</p>
+        <div>
+          <h3 class="tl__role">Master in Software Engineering</h3>
+          <p class="tl__org">Sindh Agriculture University · Hyderabad</p>
+        </div>
+        <p class="tl__what">In progress.</p>
+      </div>
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">2020 — 2021</p>
+        <div>
+          <h3 class="tl__role">Artificial Intelligence specialisation</h3>
+          <p class="tl__org">Isra University · Hyderabad</p>
+        </div>
+        <p class="tl__what">Specialisation certificate, not a full degree.</p>
+      </div>
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">2017 — 2021</p>
+        <div>
+          <h3 class="tl__role">BSc Information Technology</h3>
+          <p class="tl__org">Sindh Agriculture University · Tando Jam</p>
+        </div>
+        <p class="tl__what">Completed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- stack pointer -->
+<section class="sec sec--tight">
+  <div class="shell">
+    <a class="cs-next" href="stack.html" data-reveal>
+      <div>
+        <p class="mono muted">Technical stack</p>
+        <p class="h4" style="margin-top:0.5rem;max-width:24ch">Every technology, and the production system it shipped in</p>
+      </div>
+      <span class="btn btn--dark" style="pointer-events:none">
+        View the stack
+        <span class="btn__dot" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- honesty note -->
+<section class="sec sec--tight">
+  <div class="shell shell--narrow">
+    <div class="cs-aside" data-reveal style="border-radius:var(--r-lg)">
+      <h4>A note on how this site is written</h4>
+      <p style="font-size:var(--t-sm);color:var(--muted);text-wrap:pretty">
+        Where work was a team delivery, it says so. Where a client asked to stay
+        anonymous, they're described rather than named. Where a project was a
+        contribution to something that already existed, it says "contributed" and not
+        "built". Where something was architected by me and implemented by others, it
+        says that too. If any claim here doesn't survive a follow-up question in an
+        interview, it shouldn't be on the page — so I've written it assuming you'll ask.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark cta">
+  <div class="shell">
+    <div class="cta__grid">
+      <div>
+        <p class="eyebrow"><i>→</i> Next</p>
+        <h2 class="h2">Let's talk about what you're building.</h2>
+        <p class="lead" style="margin-top:1.5rem;color:var(--muted-dark);max-width:44ch">
+          Open to senior backend, platform and AI-tooling roles — remote or Karachi-based.
+        </p>
+        <div style="margin-top:2.25rem">
+          <a class="btn" href="contact.html">
+            Get in touch
+            <span class="btn__dot" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:aleemii270@gmail.com"><span class="k">Email</span><span class="v">aleemii270@gmail.com</span></a>
+        <a href="https://linkedin.com/in/majidalee" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">/in/majidalee</span></a>
+        <a href="https://github.com/Majidalee1" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">@Majidalee1</span></a>
+        <a href="assets/Majid_Ali_Resume.pdf"><span class="k">Résumé</span><span class="v">PDF · 2 pages</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"></span>Majid Ali <span>/ engineer</span></a>
+        <p>Backend, cloud infrastructure and AI/LLM tooling. Currently Technical Operations Lead at Sehat Kahani, and founder of Codenetic.</p>
+      </div>
+      <div><h4>Site</h4><ul><li><a href="index.html">Home</a></li><li><a href="work/index.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="stack.html">Stack</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Case studies</h4><ul><li><a href="work/mcp-server.html">MCP database server</a></li><li><a href="work/leafgistics-wms.html">Leafgistics WMS</a></li><li><a href="work/azure-cost-redesign.html">Azure cost redesign</a></li><li><a href="work/myaigi-agents.html">Multi-agent platform</a></li></ul></div>
+      <div><h4>Elsewhere</h4><ul><li><a href="https://github.com/Majidalee1" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://linkedin.com/in/majidalee" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="assets/Majid_Ali_Resume.pdf">Résumé (PDF)</a></li><li><a href="mailto:aleemii270@gmail.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot__base"><p>© <span data-year>2026</span> Majid Ali</p><p>Built as static HTML · no framework, no tracking</p></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

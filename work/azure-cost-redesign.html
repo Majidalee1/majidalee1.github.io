@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An 88% cloud cost reduction, live in production — Majid Ali</title>
+<meta name="description" content="Case study: redesigning a national telemedicine platform's Azure infrastructure around Application Gateway, App Services and Functions, cutting monthly spend from roughly $12,000 to $1,500.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23081122'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23F5FE90' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav on-dark">
+  <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"></span>Majid Ali <span>/ engineer</span></a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="index.html">Work</a>
+    <a href="../about.html">About</a>
+    <a href="../stack.html">Stack</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <div class="nav__cta">
+    <a class="btn" href="../assets/Majid_Ali_Resume.pdf">Résumé<span class="btn__dot" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="phead phead--dark">
+  <div class="shell">
+    <p class="eyebrow"><i>03</i> Cloud economics · Zetsol</p>
+    <h1 class="h1">An 88% cloud cost reduction, live in production</h1>
+    <p class="lead">
+      A national telemedicine platform's Azure bill had outgrown its architecture. I
+      redesigned the infrastructure around Application Gateway, App Services and Azure
+      Functions, taking monthly spend from roughly $12,000 to roughly $1,500 — as an
+      individual contributor, with the platform serving patients throughout.
+    </p>
+  </div>
+</section>
+
+<section class="sec sec--flood sec--tight" data-bars>
+  <div class="shell">
+    <div class="flood__grid">
+      <div>
+        <p class="flood__n">88<span style="font-size:0.4em">%</span></p>
+        <p class="lead flood__cap">
+          Monthly run-rate removed. Roughly $126,000 annualised, on a platform that
+          never went down for it.
+        </p>
+      </div>
+      <div class="bars">
+        <div class="bar">
+          <div class="bar__top">
+            <span>Before</span>
+            <span class="bar__val">~$12,000<span class="mono" style="font-size:0.5em"> /mo</span></span>
+          </div>
+          <div class="bar__track"><div class="bar__fill" style="--w:1"></div></div>
+        </div>
+        <div class="bar bar--after">
+          <div class="bar__top">
+            <span>After</span>
+            <span class="bar__val">~$1,500<span class="mono" style="font-size:0.5em"> /mo</span></span>
+          </div>
+          <div class="bar__track"><div class="bar__fill" style="--w:0.125"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tight">
+  <div class="shell">
+    <dl class="cs-meta">
+      <div><dt>Context</dt><dd>Zetsol Technologies · 2021 — 2022</dd></div>
+      <div><dt>Role</dt><dd>Individual contributor</dd></div>
+      <div><dt>Platform</dt><dd>National telemedicine, live</dd></div>
+      <div><dt>Stack</dt><dd>Azure · Application Gateway · App Services · Functions · MySQL</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec sec--tight">
+  <div class="shell">
+    <div class="cs-layout">
+
+      <div class="prose">
+        <h2 style="border:0;padding-top:0;margin-top:0">Where the money was going</h2>
+        <p>
+          The platform had grown the way most production systems grow: each new
+          requirement got the resource that was easiest to provision at the time. The
+          result was a footprint sized for peak load at every hour of the day, with
+          compute permanently allocated to work that was intermittent by nature.
+        </p>
+        <p>
+          The bill was the symptom. The actual problem was that the shape of the
+          infrastructure no longer matched the shape of the traffic.
+        </p>
+
+        <p class="pull">
+          Cloud cost work is architecture work wearing a finance costume. You do not get
+          88% from buying reserved instances. You get it from changing what runs, and
+          when.
+        </p>
+
+        <h2>The redesign</h2>
+        <p>
+          Three moves, in order of impact:
+        </p>
+        <ul>
+          <li>
+            <strong>Application Gateway as the single ingress.</strong> Consolidating
+            entry into one managed gateway removed a layer of per-service public
+            surface and gave one place to handle routing and TLS, rather than paying
+            for that capability repeatedly.
+          </li>
+          <li>
+            <strong>App Services for the request path.</strong> Moving the
+            always-on HTTP workloads onto right-sized App Service plans meant paying
+            for the tier the traffic actually justified, with scaling attached to the
+            plan instead of to a permanently over-provisioned host.
+          </li>
+          <li>
+            <strong>Azure Functions for everything intermittent.</strong> Background
+            jobs, media handling and scheduled work do not need a machine waiting for
+            them. Anything that ran on a trigger rather than a request moved to
+            consumption-billed Functions, which is where the largest share of the
+            saving came from — that workload went from continuously provisioned to
+            billed per execution.
+          </li>
+        </ul>
+
+        <h2>Doing it without an outage</h2>
+        <p>
+          This was a healthcare platform with real consultations happening on it. The
+          constraint that shaped the whole project was that there was no window in which
+          it was acceptable for the system to be unavailable.
+        </p>
+        <p>
+          So the migration was incremental by design: move one workload class at a time,
+          keep the old path available until the new one is proven under real traffic,
+          and treat the cost graph as the verification signal rather than the goal. A
+          drop in spend that comes with a rise in error rate is not a win, it's a
+          regression with good PR.
+        </p>
+
+        <h2>What I took from it</h2>
+        <p>
+          Two things I still apply. First, <strong>read the bill as a system
+          diagram</strong> — a cost breakdown by resource tells you where your
+          architecture disagrees with your traffic, and it is often more honest than the
+          architecture diagram anyone drew. Second, the cheapest compute is the compute
+          that isn't running; the highest-leverage question is usually "does this need to
+          be always-on?" rather than "can this be smaller?"
+        </p>
+        <p>
+          I later carried the same instinct into a cross-cloud migration onto AWS
+          Elastic Beanstalk at Sehat Kahani, and into a Redshift → ClickHouse warehouse
+          migration at BitsPro. Same shape of problem, different vendors.
+        </p>
+
+        <h3>A note on attribution</h3>
+        <p>
+          This work belongs to my 2021 — 2022 development stint at Zetsol, when I was an
+          individual contributor, not to a later leadership role. I mention that because
+          cost-reduction numbers have a habit of migrating up someone's résumé to a
+          more senior title, and this one shouldn't.
+        </p>
+      </div>
+
+      <aside class="cs-rail">
+        <div class="schema">
+          <div class="schema__bar"><i aria-hidden="true"></i> Target architecture <em>azure</em></div>
+          <div class="schema__body">
+            <div class="snode snode--edge"><b>Application Gateway</b><small>ingress · TLS</small></div>
+            <div class="schema__branch schema__branch--2">
+              <div class="snode"><b>app · api</b></div>
+              <div class="snode"><b>app · web</b></div>
+              <div class="snode"><b>fn · jobs</b></div>
+              <div class="snode"><b>fn · media</b></div>
+            </div>
+            <div class="snode snode--edge"><b>MySQL</b><small>right-sized</small></div>
+            <p class="schema__note">Always-on → App Service plans · trigger-driven → consumption-billed Functions</p>
+          </div>
+        </div>
+
+        <div class="cs-aside cs-aside--flat">
+          <h4>Related</h4>
+          <div class="rail-links">
+            <a href="leafgistics-wms.html">Leafgistics WMS <span aria-hidden="true">→</span></a>
+            <a href="mcp-server.html">MCP database server <span aria-hidden="true">→</span></a>
+            <a href="index.html">All projects <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tight">
+  <div class="shell">
+    <a class="cs-next" href="myaigi-agents.html">
+      <div>
+        <p class="mono muted">Next case study</p>
+        <p class="h4" style="margin-top:0.5rem">A seven-agent coaching platform with a safety gate</p>
+      </div>
+      <span class="btn btn--dark" style="pointer-events:none">
+        Read
+        <span class="btn__dot" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"></span>Majid Ali <span>/ engineer</span></a>
+        <p>Backend, cloud infrastructure and AI/LLM tooling. Currently Technical Operations Lead at Sehat Kahani, and founder of Codenetic.</p>
+      </div>
+      <div><h4>Site</h4><ul><li><a href="../index.html">Home</a></li><li><a href="index.html">Work</a></li><li><a href="../about.html">About</a></li><li><a href="../stack.html">Stack</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+      <div><h4>Case studies</h4><ul><li><a href="mcp-server.html">MCP database server</a></li><li><a href="leafgistics-wms.html">Leafgistics WMS</a></li><li><a href="azure-cost-redesign.html">Azure cost redesign</a></li><li><a href="myaigi-agents.html">Multi-agent platform</a></li></ul></div>
+      <div><h4>Elsewhere</h4><ul><li><a href="https://github.com/Majidalee1" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://linkedin.com/in/majidalee" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="../assets/Majid_Ali_Resume.pdf">Résumé (PDF)</a></li><li><a href="mailto:aleemii270@gmail.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot__base"><p>© <span data-year>2026</span> Majid Ali</p><p>Built as static HTML · no framework, no tracking</p></div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

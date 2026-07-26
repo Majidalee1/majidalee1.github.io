@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Majid Ali — Backend, Cloud &amp; AI/LLM Tooling Engineer</title>
+<meta name="description" content="Backend and cloud engineer in Karachi. Led a 4-person team building event-driven microservices on AWS, cut a telemedicine platform's cloud spend by ~88%, and builds MCP servers that expose production systems to LLMs as callable tools.">
+<meta name="author" content="Majid Ali">
+<meta property="og:title" content="Majid Ali — Backend, Cloud &amp; AI/LLM Tooling Engineer">
+<meta property="og:description" content="Five years of production backends, cloud infrastructure and AI tooling. Selected work, case studies and engineering timeline.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23081122'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23F5FE90' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ====================================================== nav -->
+<header class="nav on-dark">
+  <a class="brand" href="index.html">
+    <span class="brand__mark" aria-hidden="true"></span>
+    Majid Ali <span>/ engineer</span>
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a href="work/index.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="stack.html">Stack</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="nav__cta">
+    <a class="btn" href="assets/Majid_Ali_Resume.pdf">
+      Résumé
+      <span class="btn__dot" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+    <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ====================================================== hero -->
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="shell">
+    <div class="hero__grid">
+
+      <div>
+        <p class="mono muted" data-load style="--d:0ms">
+          Karachi, PK · UTC+5 · Available now
+        </p>
+
+        <h1 class="h1" style="margin-top:1.5rem;--d:100ms" data-load>
+          I build the infrastructure other engineers <em>build on</em>.
+        </h1>
+
+        <p class="lead hero__sub" data-load style="--d:200ms">
+          Backend and cloud engineer, five years in production. I've led a four-person
+          team architecting event-driven microservices on AWS, redesigned a national
+          telemedicine platform's cloud footprint down to a fraction of its cost, and
+          built Model Context Protocol servers that hand live systems to LLMs as
+          callable tools.
+        </p>
+
+        <div class="hero__actions" data-load style="--d:300ms">
+          <a class="btn" href="work/index.html">
+            See selected work
+            <span class="btn__dot" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+          <a class="link-arrow" href="contact.html">
+            Start a conversation
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dev-native replacement for the reference template's hero photograph -->
+      <div class="term" data-load data-type style="--d:420ms">
+        <div class="term__bar" aria-hidden="true">
+          <b></b><b></b><b></b>
+          <span>~/majid — zsh</span>
+        </div>
+        <div class="term__body">
+          <code>
+<span class="term__row"><span class="term__prompt">$</span> whoami</span>
+<span class="term__row">majid-ali · backend / cloud / ai-tooling</span>
+<span class="term__row">&nbsp;</span>
+<span class="term__row"><span class="term__prompt">$</span> cat ~/.config/engineer.toml</span>
+<span class="term__row"><span class="c">[experience]</span></span>
+<span class="term__row"><span class="k">years</span>          = <span class="n">5</span></span>
+<span class="term__row"><span class="k">team_led</span>       = <span class="n">4</span></span>
+<span class="term__row"><span class="k">apps_published</span> = <span class="n">70</span></span>
+<span class="term__row">&nbsp;</span>
+<span class="term__row"><span class="c">[owns]</span></span>
+<span class="term__row"><span class="k">cloud</span>   = [<span class="s">"AWS EKS"</span>, <span class="s">"Fargate"</span>, <span class="s">"Azure"</span>]</span>
+<span class="term__row"><span class="k">runtime</span> = [<span class="s">"Node.js"</span>, <span class="s">"TypeScript"</span>, <span class="s">"Python"</span>]</span>
+<span class="term__row"><span class="k">ai</span>      = [<span class="s">"MCP"</span>, <span class="s">"LangGraph"</span>, <span class="s">"Pinecone"</span>]</span>
+<span class="term__row"><span class="k">data</span>    = [<span class="s">"MySQL"</span>, <span class="s">"ClickHouse"</span>, <span class="s">"Redis"</span>]</span>
+<span class="term__row">&nbsp;</span>
+<span class="term__row"><span class="term__prompt">$</span> ./receipts --top 1</span>
+<span class="term__row"><span class="c">azure redesign · $12,000/mo → $1,500/mo · </span><span class="k">-88%</span></span>
+<span class="term__row"><span class="term__prompt">$</span> <span class="term__cursor" aria-hidden="true"></span></span>
+          </code>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero__strip" data-load style="--d:560ms">
+      <ul>
+        <li><span class="dot" style="--dom:var(--dom-cloud)"></span> Cloud &amp; infrastructure</li>
+        <li><span class="dot" style="--dom:var(--dom-data)"></span> Distributed backends</li>
+        <li><span class="dot" style="--dom:var(--dom-ai)"></span> AI / LLM tooling</li>
+        <li><span class="dot" style="--dom:var(--dom-mobile)"></span> Mobile delivery</li>
+      </ul>
+      <p>Currently Technical Operations Lead @ Sehat Kahani</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== stats -->
+<section class="sec sec--tight">
+  <div class="shell">
+    <div class="stats" data-reveal>
+      <div class="stat">
+        <div class="stat__n"><span data-count="88">88</span><sub>%</sub></div>
+        <p class="stat__l">Monthly cloud spend removed by redesigning a national telemedicine platform's Azure infrastructure</p>
+        <p class="stat__src">Zetsol · 2021—2022</p>
+      </div>
+      <div class="stat">
+        <div class="stat__n"><span data-count="4">4</span></div>
+        <p class="stat__l">Backend engineers led, building an event-driven warehouse management system in production</p>
+        <p class="stat__src">BitsPro · 2022—2023</p>
+      </div>
+      <div class="stat">
+        <div class="stat__n"><span data-count="70">70</span><sub>+</sub></div>
+        <p class="stat__l">Applications published to the App Store and Google Play through my consultancy</p>
+        <p class="stat__src">Codenetic · 2022—now</p>
+      </div>
+      <div class="stat">
+        <div class="stat__n"><span data-count="5">5</span><sub>+</sub></div>
+        <p class="stat__l">Years shipping production backends, cloud infrastructure and AI tooling</p>
+        <p class="stat__src">2021 → now</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== capabilities -->
+<section class="sec sec--tight" id="capabilities">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>01</i> What I build</p>
+
+    <div class="split sec-intro">
+      <p class="split__label" data-reveal>Capabilities</p>
+      <h2 class="h3" data-reveal>Four surfaces I own end to end — and the shipped systems that prove each one.</h2>
+    </div>
+
+    <div class="caps">
+      <article class="cap cap--tall" data-reveal style="--d:0ms">
+        <div>
+          <div class="cap__icon" style="--dom:var(--dom-cloud)" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 13.5A3.5 3.5 0 0 1 6.2 10a4.8 4.8 0 0 1 9.3-.8A3.2 3.2 0 0 1 17 15.5H6.5A3.5 3.5 0 0 1 3 13.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="margin-top:1.25rem">Cloud &amp; infrastructure</h3>
+          <p>Containerised microservices on AWS EKS and ECS running on Fargate behind load balancers. Cross-cloud migration of a live platform onto AWS Elastic Beanstalk while Azure stayed in service. Infrastructure redesign driven by the bill, not the diagram — and CI/CD that gates every release on lint, test and deploy stages.</p>
+        </div>
+        <p class="cap__evidence">Evidence → Leafgistics WMS · Azure cost redesign · Sehat Kahani migration</p>
+      </article>
+
+      <article class="cap" data-reveal style="--d:70ms">
+        <div class="cap__icon" style="--dom:var(--dom-data)" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 6 3 10l4 4M13 6l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Backend &amp; APIs</h3>
+        <p>Node.js, TypeScript and Python services — REST design, event buses over NATS Streaming, WebRTC consultation backends and Server-Sent Events streaming.</p>
+        <p class="cap__evidence">Node · TypeScript · Python · Koa2 · Express</p>
+      </article>
+
+      <article class="cap" data-reveal style="--d:140ms">
+        <div class="cap__icon" style="--dom:var(--dom-ai)" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="10" cy="3.6" r="1.6" stroke="currentColor" stroke-width="1.4"/><circle cx="4" cy="14" r="1.6" stroke="currentColor" stroke-width="1.4"/><circle cx="16" cy="14" r="1.6" stroke="currentColor" stroke-width="1.4"/><path d="M10 6v1.6M8 11.6 5.2 13M12 11.6 14.8 13" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <h3>AI / LLM tooling</h3>
+        <p>MCP servers exposing real systems as LLM-callable tools, and multi-agent orchestration in LangChain/LangGraph across Claude, OpenAI and Gemini — with a QA gate in front of generated output.</p>
+        <p class="cap__evidence">MCP · LangGraph · Pinecone · Multi-provider</p>
+      </article>
+
+      <article class="cap" data-reveal style="--d:210ms">
+        <div class="cap__icon" style="--dom:var(--dom-data)" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><ellipse cx="10" cy="5.5" rx="6" ry="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 5.5v9c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-9M4 10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <h3>Data &amp; storage</h3>
+        <p>MySQL, PostgreSQL, MongoDB and Redis in production, plus an OLAP warehouse migration from Amazon Redshift to ClickHouse that kept columnar query speed while cutting cost.</p>
+        <p class="cap__evidence">MySQL · Postgres · Redis · ClickHouse</p>
+      </article>
+
+      <article class="cap" data-reveal style="--d:280ms">
+        <div class="cap__icon" style="--dom:var(--dom-mobile)" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="6" y="2.5" width="8" height="15" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M9 15h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Mobile delivery</h3>
+        <p>React Native and Expo at release scale — offline-first sync for field staff, native call integration, SDK migrations and automated release pipelines with version-consistency gating.</p>
+        <p class="cap__evidence">React Native · Expo · EAS · Native modules</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== flood: the number -->
+<section class="sec sec--flood" data-bars>
+  <div class="shell">
+    <p class="eyebrow"><i>02</i> The number I get asked about</p>
+
+    <div class="flood__grid">
+      <div>
+        <p class="flood__n">88<span style="font-size:0.4em">%</span></p>
+        <p class="lead flood__cap">
+          A national telemedicine platform was paying roughly $12,000 a month to Azure.
+          I redesigned the infrastructure around Application Gateway, App Services and
+          Azure Functions and brought it to about $1,500 — as an individual contributor,
+          with the platform live throughout.
+        </p>
+        <a class="btn btn--dark" href="work/azure-cost-redesign.html" style="margin-top:2rem">
+          Read the case study
+          <span class="btn__dot" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="bars">
+        <div class="bar">
+          <div class="bar__top">
+            <span>Before · monolithic footprint</span>
+            <span class="bar__val">~$12,000<span class="mono" style="font-size:0.5em"> /mo</span></span>
+          </div>
+          <div class="bar__track"><div class="bar__fill" style="--w:1"></div></div>
+        </div>
+
+        <div class="bar bar--after">
+          <div class="bar__top">
+            <span>After · redesigned footprint</span>
+            <span class="bar__val">~$1,500<span class="mono" style="font-size:0.5em"> /mo</span></span>
+          </div>
+          <div class="bar__track"><div class="bar__fill" style="--w:0.125"></div></div>
+          <p class="bar__note">≈ $126,000 of annualised run-rate removed, without taking the platform down.</p>
+        </div>
+
+        <dl class="ledger">
+          <div><dt>Ingress</dt><dd>Consolidated onto Application Gateway</dd></div>
+          <div><dt>Request path</dt><dd>Right-sized App Service plans</dd></div>
+          <div><dt>Background work</dt><dd>Always-on → consumption-billed Functions</dd></div>
+          <div><dt>Downtime</dt><dd>None — incremental cutover under live traffic</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== selected work -->
+<section class="sec" id="work">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>03</i> Selected work</p>
+
+    <div class="split sec-intro">
+      <p class="split__label" data-reveal>Four of them, in depth</p>
+      <h2 class="h3" data-reveal>Systems that were used in production by people who were not me.</h2>
+    </div>
+
+    <div class="work">
+
+      <!-- 01 -->
+      <article class="work__row" data-reveal>
+        <div>
+          <div class="work__head">
+            <span class="dot" style="--dom:var(--dom-ai)"></span>
+            <span class="work__idx">01 / AI TOOLING</span>
+          </div>
+          <h3><a href="work/mcp-server.html">Production database as an LLM tool surface</a></h3>
+          <p>
+            A Model Context Protocol server exposing a live Azure MySQL database as
+            LLM-callable tools, with a Chainlit chat interface so the platform can be
+            queried and managed in natural language instead of raw SQL.
+          </p>
+          <dl class="work__meta">
+            <div><dt>Context</dt><dd>Sehat Kahani · 2026</dd></div>
+            <div><dt>Role</dt><dd>Sole author</dd></div>
+            <div><dt>Stack</dt><dd>Python · MCP · Chainlit · MySQL</dd></div>
+            <div><dt>Status</dt><dd>Built &amp; in use</dd></div>
+          </dl>
+          <span class="link-arrow work__more">
+            Read case study
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="panel" aria-hidden="true">
+          <div class="nodes">
+            <div class="node node--in"><span class="dot" style="--dom:var(--dom-ai)"></span><b>LLM client</b><small>Claude · Cursor</small></div>
+            <div class="nodes__rail"></div>
+            <div class="node"><span class="dot" style="--dom:var(--dom-ai)"></span><b>MCP server</b><small>tools · resources</small></div>
+            <div class="nodes__rail"></div>
+            <div class="fan">
+              <div class="node"><b>schema.list</b></div>
+              <div class="node"><b>query.run</b></div>
+              <div class="node"><b>table.describe</b></div>
+              <div class="node"><b>chainlit.ui</b></div>
+            </div>
+            <div class="nodes__rail"></div>
+            <div class="node"><span class="dot" style="--dom:var(--dom-cloud)"></span><b>Azure MySQL</b><small>production</small></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="work__row" data-reveal>
+        <div>
+          <div class="work__head">
+            <span class="dot" style="--dom:var(--dom-cloud)"></span>
+            <span class="work__idx">02 / DISTRIBUTED SYSTEMS</span>
+          </div>
+          <h3><a href="work/leafgistics-wms.html">Event-driven warehouse management at multi-site scale</a></h3>
+          <p>
+            Led a four-person backend team building a warehouse management system for
+            Leafgistics, a US cannabis logistics operator — independently deployable
+            services on AWS EKS and Fargate, communicating over an event bus.
+          </p>
+          <dl class="work__meta">
+            <div><dt>Context</dt><dd>BitsPro · 2022—2023</dd></div>
+            <div><dt>Role</dt><dd>Backend &amp; DevOps team lead</dd></div>
+            <div><dt>Stack</dt><dd>Node.js · TypeScript · NATS · EKS</dd></div>
+            <div><dt>Scale</dt><dd>3 fulfilment centres</dd></div>
+          </dl>
+          <span class="link-arrow work__more">
+            Read case study
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="panel panel--paper" aria-hidden="true">
+          <div class="nodes">
+            <div class="node"><span class="dot" style="--dom:var(--dom-cloud)"></span><b>AWS EKS / Fargate</b><small>load balanced</small></div>
+            <div class="nodes__rail"></div>
+            <div class="fan">
+              <div class="node"><b>inventory</b></div>
+              <div class="node"><b>orders</b></div>
+              <div class="node"><b>rfid-gateway</b></div>
+              <div class="node"><b>audit</b></div>
+            </div>
+            <div class="nodes__rail"></div>
+            <div class="node node--in"><span class="dot" style="--dom:var(--dom-data)"></span><b>NATS Streaming event bus</b></div>
+            <div class="nodes__rail"></div>
+            <div class="node"><span class="dot" style="--dom:var(--dom-data)"></span><b>ClickHouse</b><small>was Redshift</small></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="work__row" data-reveal>
+        <div>
+          <div class="work__head">
+            <span class="dot" style="--dom:var(--dom-cloud)"></span>
+            <span class="work__idx">03 / CLOUD ECONOMICS</span>
+          </div>
+          <h3><a href="work/azure-cost-redesign.html">An 88% cloud cost reduction, live in production</a></h3>
+          <p>
+            A national telemedicine platform's Azure footprint had outgrown its
+            architecture. I rebuilt it around Application Gateway, App Services and
+            Azure Functions, taking monthly spend from roughly $12,000 to $1,500.
+          </p>
+          <dl class="work__meta">
+            <div><dt>Context</dt><dd>Zetsol · 2021—2022</dd></div>
+            <div><dt>Role</dt><dd>Individual contributor</dd></div>
+            <div><dt>Stack</dt><dd>Azure · App Services · Functions</dd></div>
+            <div><dt>Outcome</dt><dd>~88% monthly reduction</dd></div>
+          </dl>
+          <span class="link-arrow work__more">
+            Read case study
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="panel" aria-hidden="true">
+          <div class="nodes">
+            <div class="node node--in"><b>Application Gateway</b><small>ingress · WAF</small></div>
+            <div class="nodes__rail"></div>
+            <div class="fan">
+              <div class="node"><b>app-service · api</b></div>
+              <div class="node"><b>app-service · web</b></div>
+              <div class="node"><b>functions · jobs</b></div>
+              <div class="node"><b>functions · media</b></div>
+            </div>
+            <div class="nodes__rail"></div>
+            <div class="node"><span class="dot" style="--dom:var(--dom-data)"></span><b>MySQL</b><small>right-sized</small></div>
+            <div class="node" style="margin-top:0.55rem;border-color:var(--accent)">
+              <span class="dot" style="--dom:var(--accent)"></span><b>$12,000 → $1,500 / mo</b><small>−88%</small>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="work__row" data-reveal>
+        <div>
+          <div class="work__head">
+            <span class="dot" style="--dom:var(--dom-ai)"></span>
+            <span class="work__idx">04 / MULTI-AGENT AI</span>
+          </div>
+          <h3><a href="work/myaigi-agents.html">A seven-agent coaching platform with a safety gate</a></h3>
+          <p>
+            Architected a LangGraph platform orchestrating seven specialised agents behind
+            an intent classifier, streaming over Server-Sent Events with Pinecone vector
+            memory — and a dedicated QA agent gating every generated response.
+          </p>
+          <dl class="work__meta">
+            <div><dt>Context</dt><dd>Myaigi · via Codenetic</dd></div>
+            <div><dt>Role</dt><dd>Architect</dd></div>
+            <div><dt>Stack</dt><dd>LangGraph · Pinecone · Cassandra · SSE</dd></div>
+            <div><dt>Providers</dt><dd>Claude · OpenAI · Gemini</dd></div>
+          </dl>
+          <span class="link-arrow work__more">
+            Read case study
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="panel panel--paper" aria-hidden="true">
+          <div class="nodes">
+            <div class="node node--in"><b>intent classifier</b><small>route</small></div>
+            <div class="nodes__rail"></div>
+            <div class="fan">
+              <div class="node"><b>generation</b></div>
+              <div class="node"><b>scheduling</b></div>
+              <div class="node"><b>coaching</b></div>
+              <div class="node"><b>retrieval</b></div>
+            </div>
+            <div class="nodes__rail"></div>
+            <div class="node" style="border-color:var(--ink)"><span class="dot" style="--dom:var(--dom-ai)"></span><b>QA / safety agent</b><small>gate</small></div>
+            <div class="nodes__rail"></div>
+            <div class="node"><b>SSE stream → client</b></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="sec-action" data-reveal>
+      <a class="btn btn--ghost" href="work/index.html">
+        All projects
+        <span class="btn__dot" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== stack -->
+<section class="sec sec--grid" id="stack">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>04</i> Working stack</p>
+
+    <div class="split sec-intro">
+      <p class="split__label" data-reveal>Not a keyword list</p>
+      <h2 class="h3" data-reveal>Everything here shipped to production in something specific — and the system it shipped in is named next to it.</h2>
+    </div>
+
+    <div class="stackgrid" data-reveal>
+
+      <div class="stackcol">
+        <h3><span class="dot" style="--dom:var(--dom-cloud)"></span> Cloud &amp; infrastructure</h3>
+        <ul>
+          <li><b>AWS EKS / Fargate</b><span>Leafgistics WMS</span></li>
+          <li><b>Elastic Beanstalk</b><span>Sehat Kahani</span></li>
+          <li><b>Azure App Services</b><span>Cost redesign</span></li>
+          <li><b>Azure Functions</b><span>Cost redesign</span></li>
+          <li><b>Application Gateway</b><span>Cost redesign</span></li>
+          <li><b>Kubernetes / Docker</b><span>Leafgistics WMS</span></li>
+          <li><b>Cognito</b><span>Cross-cloud auth</span></li>
+        </ul>
+        <p class="stackcol__foot">Two clouds run in parallel through a live migration, and one bill cut by ~88%.</p>
+      </div>
+
+      <div class="stackcol">
+        <h3><span class="dot" style="--dom:var(--dom-data)"></span> Backend &amp; APIs</h3>
+        <ul>
+          <li><b>Node.js</b><span>WMS · telehealth</span></li>
+          <li><b>TypeScript</b><span>WMS · consultation</span></li>
+          <li><b>Python</b><span>MCP servers</span></li>
+          <li><b>Express / Koa2</b><span>Telemedicine</span></li>
+          <li><b>NATS Streaming</b><span>WMS event bus</span></li>
+          <li><b>WebRTC (OpenTok)</b><span>Consultation engine</span></li>
+          <li><b>Socket.io / PubNub</b><span>Realtime chat</span></li>
+        </ul>
+        <p class="stackcol__foot">Event-driven services, real-time consultation backends, and APIs consolidated rather than accumulated.</p>
+      </div>
+
+      <div class="stackcol">
+        <h3><span class="dot" style="--dom:var(--dom-ai)"></span> AI / LLM tooling</h3>
+        <ul>
+          <li><b>Model Context Protocol</b><span>DB tool server</span></li>
+          <li><b>LangGraph</b><span>7-agent platform</span></li>
+          <li><b>LangChain</b><span>7-agent platform</span></li>
+          <li><b>Pinecone</b><span>Vector memory</span></li>
+          <li><b>Cassandra</b><span>Durable agent state</span></li>
+          <li><b>Chainlit</b><span>NL DB interface</span></li>
+          <li><b>Claude / OpenAI / Gemini</b><span>Multi-provider</span></li>
+        </ul>
+        <p class="stackcol__foot">Tool boundaries and safety gates, not demos — including one open-source MCP server contribution.</p>
+      </div>
+
+      <div class="stackcol">
+        <h3><span class="dot" style="--dom:var(--dom-data)"></span> Data &amp; storage</h3>
+        <ul>
+          <li><b>MySQL</b><span>Telemedicine</span></li>
+          <li><b>PostgreSQL</b><span>Client platforms</span></li>
+          <li><b>MongoDB</b><span>Telehealth backend</span></li>
+          <li><b>Redis</b><span>Caching layer</span></li>
+          <li><b>ClickHouse</b><span>Warehouse search</span></li>
+          <li><b>Amazon Redshift</b><span>Migrated off</span></li>
+        </ul>
+        <p class="stackcol__foot">Including an OLAP migration across three fulfilment centres that held query latency while cutting cost.</p>
+      </div>
+
+      <div class="stackcol">
+        <h3><span class="dot" style="--dom:var(--dom-mobile)"></span> Mobile &amp; delivery</h3>
+        <ul>
+          <li><b>React Native</b><span>70+ published</span></li>
+          <li><b>Expo / EAS</b><span>AllVermont</span></li>
+          <li><b>CallKit / Telecom</b><span>Tryst Africa</span></li>
+          <li><b>Angular</b><span>Operations console</span></li>
+          <li><b>GitHub Actions</b><span>Release gating</span></li>
+          <li><b>GitLab CI</b><span>5 environments</span></li>
+        </ul>
+        <p class="stackcol__foot">Release pipelines with version-consistency gating, offline-first sync, and native module work.</p>
+      </div>
+
+      <div class="stackcol">
+        <h3><span class="dot" style="--dom:var(--accent)"></span> Practice</h3>
+        <ul>
+          <li><b>Team leadership</b><span>4 engineers</span></li>
+          <li><b>VAPT remediation</b><span>3 product lines</span></li>
+          <li><b>Multi-tenant operations</b><span>White-label stacks</span></li>
+          <li><b>Incident response</b><span>Live healthcare</span></li>
+          <li><b>Technical proposals</b><span>Client pre-sales</span></li>
+          <li><b>Board-level reporting</b><span>Investor-facing</span></li>
+        </ul>
+        <p class="stackcol__foot">The part of the job that isn't code — and the reason migrations landed without an outage.</p>
+      </div>
+
+    </div>
+
+    <div class="sec-action" data-reveal>
+      <a class="btn btn--ghost" href="stack.html">
+        Full stack breakdown
+        <span class="btn__dot" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== timeline -->
+<section class="sec sec--paper sec--grid" id="timeline">
+  <div class="shell">
+    <p class="eyebrow" data-reveal><i>05</i> Trajectory</p>
+
+    <div class="split sec-intro">
+      <p class="split__label" data-reveal>2021 → now</p>
+      <h2 class="h3" data-reveal>Individual contributor, then team lead, then the person accountable for the platform.</h2>
+    </div>
+
+    <div class="tl">
+      <div class="tl__row is-now" data-reveal>
+        <p class="tl__when">Jun 2024 — present</p>
+        <div>
+          <h3 class="tl__role">Technical Operations Lead</h3>
+          <p class="tl__org">Sehat Kahani · Karachi</p>
+        </div>
+        <p class="tl__what">Cross-cloud migration onto AWS Elastic Beanstalk with Azure running in parallel; penetration-test remediation across three production product lines handling protected patient data; MCP server work; end-to-end ownership of the E-Clinic product line.</p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">~2022 — present</p>
+        <div>
+          <h3 class="tl__role">Founder &amp; Technical Lead</h3>
+          <p class="tl__org">Codenetic · concurrent</p>
+        </div>
+        <p class="tl__what">Software consultancy delivering client products end to end — $200K+ earned across 300+ applications built and 70+ published to the App Store and Google Play. Several delivered with a team, not solo.</p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Sep 2023 — Jun 2024</p>
+        <div>
+          <h3 class="tl__role">Senior Project Manager</h3>
+          <p class="tl__org">Zetsol Technologies · Hyderabad</p>
+        </div>
+        <p class="tl__what">Coordinated enterprise integrations with banking, insurance and telecom partners onto a multi-tenant healthcare platform, each a white-labelled deployment with its own environment stack. Ran the corporate, clinical and retail expansion into Dubai.</p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Dec 2022 — Sep 2023</p>
+        <div>
+          <h3 class="tl__role">Backend &amp; DevOps Team Lead</h3>
+          <p class="tl__org">BitsPro · Karachi</p>
+        </div>
+        <p class="tl__what">Led four engineers building an event-driven microservices WMS on AWS EKS and Fargate; owned the warehouse data layer through a Redshift → ClickHouse migration; built the CI/CD gates for the service fleet.</p>
+      </div>
+
+      <div class="tl__row" data-reveal>
+        <p class="tl__when">Mar 2021 — Dec 2022</p>
+        <div>
+          <h3 class="tl__role">Full Stack Developer → Dev Team Lead</h3>
+          <p class="tl__org">Zetsol Technologies · Hyderabad</p>
+        </div>
+        <p class="tl__what">Built the WebRTC video and audio consultation engine on a Koa2/TypeScript backend, the Angular operations console behind it, CI/CD across five environments — and the Azure redesign that removed ~88% of monthly spend.</p>
+      </div>
+    </div>
+
+    <div class="sec-action" data-reveal>
+      <a class="link-arrow" href="about.html">
+        Full background, education and stack
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== CTA -->
+<section class="sec sec--dark cta">
+  <div class="shell">
+    <div class="cta__grid">
+      <div>
+        <p class="eyebrow"><i>06</i> Next</p>
+        <h2 class="h2" data-reveal>Hiring for backend, cloud or AI tooling?</h2>
+        <p class="lead" style="margin-top:1.5rem;color:var(--muted-dark);max-width:44ch" data-reveal>
+          I'm open to senior backend, platform and AI-tooling roles — remote or
+          Karachi-based. The fastest way to reach me is email.
+        </p>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;margin-top:2.25rem" data-reveal>
+          <a class="btn" href="mailto:aleemii270@gmail.com">
+            aleemii270@gmail.com
+            <span class="btn__dot" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+          <a class="link-arrow" href="assets/Majid_Ali_Resume.pdf">
+            Download résumé (PDF)
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v8M3 6.5 6 9.5 9 6.5M1.5 11h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-list" data-reveal>
+        <a href="mailto:aleemii270@gmail.com"><span class="k">Email</span><span class="v">aleemii270@gmail.com</span></a>
+        <a href="https://linkedin.com/in/majidalee" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">/in/majidalee</span></a>
+        <a href="https://github.com/Majidalee1" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">@Majidalee1</span></a>
+        <a href="tel:+923481837238"><span class="k">Phone</span><span class="v">+92 348 1837238</span></a>
+        <div><span class="k">Based in</span><span class="v">Karachi, Pakistan · UTC+5</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====================================================== footer -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true"></span>
+          Majid Ali <span>/ engineer</span>
+        </a>
+        <p>Backend, cloud infrastructure and AI/LLM tooling. Currently Technical Operations Lead at Sehat Kahani, and founder of Codenetic.</p>
+      </div>
+
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work/index.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="stack.html">Stack</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Case studies</h4>
+        <ul>
+          <li><a href="work/mcp-server.html">MCP database server</a></li>
+          <li><a href="work/leafgistics-wms.html">Leafgistics WMS</a></li>
+          <li><a href="work/azure-cost-redesign.html">Azure cost redesign</a></li>
+          <li><a href="work/myaigi-agents.html">Multi-agent platform</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://github.com/Majidalee1" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/majidalee" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="assets/Majid_Ali_Resume.pdf">Résumé (PDF)</a></li>
+          <li><a href="mailto:aleemii270@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot__base">
+      <p>© <span data-year>2026</span> Majid Ali</p>
+      <p>Built as static HTML · no framework, no tracking</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
