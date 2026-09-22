@@ -10,9 +10,8 @@ Pick up from the first unchecked box.
 
 ## 1. Ship it
 - [x] Commit and push (deploys from the `gh-pages` branch; `main` is kept in sync)
-- [ ] Check the live site: `https://majidalee.dev/`, `/sitemap.xml`, `/robots.txt`, `/llms.txt`
-- [ ] Turn on **Enforce HTTPS** in GitHub → Settings → Pages once the certificate is issued
-      (all canonical URLs are `https://`)
+- [x] Check the live site: all 8 pages, `/sitemap.xml`, `/robots.txt`, `/llms.txt` return 200 (23 Sep 2026)
+- [x] **Enforce HTTPS** turned on (certificate approved). Confirm `http://majidalee.dev` now redirects to `https://`
 
 ## 2. Get indexed (day 1 after launch, about 30 minutes, Majid)
 - [ ] **Google Search Console**: add `majidalee.dev` as a Domain property, verify with the DNS TXT record
