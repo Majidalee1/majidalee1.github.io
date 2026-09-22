@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LLM Inference Explained: Prefill, Decode and the KV Cache</title>
+<meta name="description" content="Why AI features feel slow: prefill, decode, the KV cache, TTFT and tokens per second explained for app developers, with the math and what to change.">
+<meta name="author" content="Majid Ali">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0D10" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Majid Ali">
+<meta property="og:url" content="https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/">
+<meta property="og:title" content="LLM Inference Explained: Prefill, Decode and the KV Cache">
+<meta property="og:description" content="Why AI features feel slow: prefill, decode, the KV cache, TTFT and tokens per second explained for app developers, with the math and what to change.">
+<meta property="og:image" content="https://majidalee.dev/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/site.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/#webpage",
+   "url": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/",
+   "name": "LLM Inference Explained: Prefill, Decode and the KV Cache",
+   "description": "Why AI features feel slow: prefill, decode, the KV cache, TTFT and tokens per second explained for app developers, with the math and what to change.",
+   "isPartOf": {
+    "@id": "https://majidalee.dev/#website"
+   },
+   "inLanguage": "en",
+   "breadcrumb": {
+    "@id": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/#breadcrumb"
+   },
+   "author": {
+    "@id": "https://majidalee.dev/#person"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Majid Ali",
+     "item": "https://majidalee.dev/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Articles",
+     "item": "https://majidalee.dev/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "LLM Inference Explained: Prefill, Decode and the KV Cache",
+     "item": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/"
+    }
+   ]
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/#article",
+   "headline": "LLM inference explained for app developers: prefill, decode and the KV cache",
+   "description": "Why AI features feel slow: prefill, decode, the KV cache, TTFT and tokens per second explained for app developers, with the math and what to change.",
+   "datePublished": "2026-09-23",
+   "dateModified": "2026-09-23",
+   "author": {
+    "@id": "https://majidalee.dev/#person",
+    "@type": "Person",
+    "name": "Majid Ali",
+    "url": "https://majidalee.dev/"
+   },
+   "publisher": {
+    "@id": "https://majidalee.dev/#person"
+   },
+   "mainEntityOfPage": {
+    "@id": "https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/#webpage"
+   },
+   "image": "https://majidalee.dev/assets/og.png",
+   "keywords": [
+    "LLM inference",
+    "prefill",
+    "decode",
+    "KV cache",
+    "TTFT",
+    "roofline model",
+    "speculative decoding",
+    "continuous batching"
+   ],
+   "articleSection": "AI engineering",
+   "wordCount": 1178,
+   "inLanguage": "en"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="shell">
+    <a class="home" href="../../" aria-label="Majid Ali, home"><svg class="wm" viewBox="0 0 96 44" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v16M4 22a6 6 0 0 1 12 0v10M16 22a6 6 0 0 1 12 0v10"/><circle cx="44" cy="24" r="8"/><path d="M52 16v16M60 16v18a4 4 0 0 1-4 4h-1M68 16v16"/><circle cx="84" cy="24" r="8"/><path d="M92 6v26"/></g><circle class="dot" cx="60" cy="9" r="2.6"/><circle class="dot" cx="68" cy="9" r="2.6"/></svg></a>
+    <nav aria-label="Primary">
+      <a href="../../">Portfolio</a>
+      <a class="opt" href="../../react-native-app-development/">React Native apps</a><a class="opt" href="../../ai-app-development/">AI apps</a><a class="opt" href="../../mvp-app-development/">Startup MVPs</a>
+      <a href="../../blog/">Articles</a>
+    </nav>
+    <a class="btn sm" href="mailto:aleemii270@gmail.com?subject=Hello%20from%20majidalee.dev">Contact</a>
+  </div>
+</header>
+
+<main id="main" class="page">
+  <ol class="crumbs" aria-label="Breadcrumb"><li><a href="../../">Majid Ali</a></li><li><a href="../../blog/">Articles</a></li><li aria-current="page">LLM Inference Explained: Prefill, Decode and the KV Cache</li></ol>
+  <article>
+  <div class="page-hero">
+    <h1>LLM inference explained for app developers: prefill, decode and the KV cache</h1>
+    <p class="byline"><span>By <b>Majid Ali</b></span><span><time datetime="2026-09-23">23 September 2026</time></span><span>5 min read</span></p>
+    <p class="lede">Every AI feature you ship sits on top of the same two-phase process. Once you see it, it’s obvious why streaming helps, why long prompts hurt, and why output tokens cost more than input tokens.</p>
+  </div>
+  <div class="prose">
+<div class="answer"><strong>The short version</strong>LLM inference runs in two phases. <b>Prefill</b> reads your whole prompt in parallel and produces the first token; it sets <b>time to first token (TTFT)</b>. <b>Decode</b> then generates one token at a time, re-reading the model’s weights and the KV cache on every step; it sets <b>time per output token</b>. Prefill is usually limited by compute. Decode is usually limited by memory bandwidth.</div>
+
+<p>I build AI features for a living, mostly through APIs: a seven-agent coaching platform, an MCP server over a production database, an LLM that drafts clinical notes. On Myaigi, the multi-agent platform, the total wait for an answer is several model calls added together, so we stream every answer to the React Native app. Users judge speed by whether they see progress.</p>
+<p>That made me want to understand what happens inside one of those calls. These are my notes from working through the “Start here” path of Wafer’s <a href="https://github.com/wafer-ai/gpu-perf-engineering-resources">GPU performance engineering reading list</a>, written for developers who call models rather than people who write CUDA. I’m an application engineer, not a kernel engineer, so every number below links to the source I took it from.</p>
+
+<h2>One request, two phases</h2>
+<p>When you send a prompt, the model doesn’t read it word by word. During <b>prefill</b> it pushes every prompt token through every layer at once, as large matrix multiplications. The GPU is doing a lot of arithmetic for each byte it loads, which is exactly what GPUs are good at. Prefill produces two things: the first output token, and the <b>KV cache</b> (more on that below).</p>
+<p><b>Decode</b> is different. The model generates one token, appends it, and runs again for the next one. Each step does a small amount of math, but it has to read the model’s weights from GPU memory to do it. A 7-billion-parameter model stored in 16-bit precision is about 14 GB of weights. So producing a single token means streaming roughly 14 GB through the chip. Then it does it again for the next token.</p>
+<table>
+  <thead><tr><th>Phase</th><th>What it does</th><th>Usually limited by</th><th>What your user feels</th></tr></thead>
+  <tbody>
+    <tr><td>Prefill</td><td>Processes all prompt tokens in parallel</td><td>Compute</td><td>Time to first token</td></tr>
+    <tr><td>Decode</td><td>Generates one token per step</td><td>Memory bandwidth</td><td>How fast the text streams</td></tr>
+  </tbody>
+</table>
+<p>The clearest walkthrough of this I found is the <a href="https://jax-ml.github.io/scaling-book/inference/">inference chapter of How to Scale Your Model</a>, which follows one request from prefill through decode.</p>
+
+<h2>Why decode is memory-bound: the roofline in one paragraph</h2>
+<p>The <a href="https://users.cs.duke.edu/~lkw34/papers/roofline-cacm2008.pdf">roofline model</a> asks one question: how many operations do you do per byte you move? That ratio is called <b>arithmetic intensity</b>. Below a certain ratio the chip waits on memory; above it, the chip waits on its own arithmetic.</p>
+<p>Kipply’s <a href="https://kipply.github.io/blog/transformer-inference-arithmetic/">Transformer Inference Arithmetic</a> works this through for an A100: about 312 teraFLOPs of 16-bit compute against about 1.5 TB/s of memory bandwidth, a ratio of roughly 208. You need around 200 operations per byte loaded to keep the math units busy. Decode for a single request does about two operations per weight while loading two bytes per weight. That’s about one operation per byte, nowhere near 200. The GPU spends most of decode waiting for memory.</p>
+<p>This one fact explains most of the tricks serving engines use.</p>
+
+<h2>The KV cache, and why it eats memory</h2>
+<p>Attention needs every earlier token’s <b>keys</b> and <b>values</b>. Recomputing them at every decode step would be wasteful, so the engine keeps them in GPU memory: the KV cache. Its size per token is:</p>
+<pre><code>bytes per token = 2 (keys and values) × layers × KV heads × head dimension × bytes per value</code></pre>
+<p>For Llama 2 7B (32 layers, 32 heads of dimension 128, 16-bit values) that’s 2 × 32 × 32 × 128 × 2 = 524,288 bytes, about <b>0.5 MB per token</b>. A 4,096-token conversation holds around 2 GB of KV cache on top of the weights, for one user.</p>
+<p>That’s why newer models use <a href="https://arxiv.org/abs/2305.13245">grouped-query attention</a>, where several query heads share one set of keys and values (Llama 2 70B uses 8 KV heads for its 64 query heads), and why <a href="https://arxiv.org/abs/2405.04434">DeepSeek-V2</a> compresses the cache further. It’s also why <a href="https://arxiv.org/html/2309.06180">vLLM’s PagedAttention</a> manages KV memory in fixed-size pages, the way an operating system manages RAM, so memory isn’t wasted on space a conversation might never use.</p>
+
+<h2>How serving engines win speed back</h2>
+<h3>Batching</h3>
+<p>If decode is waiting on memory anyway, serve many users per trip. The weights are read once per step and used for every request in the batch, which raises arithmetic intensity. <a href="https://www.usenix.org/conference/osdi22/presentation/yu">Orca</a> introduced iteration-level scheduling, now called continuous batching: new requests join the batch between decode steps instead of waiting for the whole batch to finish.</p>
+<h3>Quantization</h3>
+<p>Storing weights in 8 or 4 bits instead of 16 means fewer bytes per decode step, and decode is memory-bound, so it gets faster almost directly. <a href="https://arxiv.org/abs/2210.17323">GPTQ</a> and <a href="https://proceedings.mlsys.org/paper_files/paper/2024/file/42a452cbafa9dd64e9ba4aa95cc1ef21-Paper-Conference.pdf">AWQ</a> are the standard weight-only methods.</p>
+<h3>Speculative decoding</h3>
+<p>A small draft model guesses several tokens ahead, and the large model checks all of them in a single pass. When the guesses are right you get several tokens for the price of one big-model step, and the <a href="https://proceedings.mlr.press/v202/leviathan23a.html">original paper</a> shows the output distribution stays exactly the same.</p>
+<h3>Chunked prefill</h3>
+<p>One user’s 50-page prompt shouldn’t freeze everyone else’s streaming. <a href="https://www.usenix.org/system/files/osdi24-agrawal.pdf">Sarathi-Serve</a> splits long prefills into chunks and interleaves them with other users’ decode steps.</p>
+
+<h2>What this changes in your app</h2>
+<p>You can’t tune a provider’s GPUs. You can change what you send them.</p>
+<ol class="steps">
+  <li><b>Stream every answer</b>Time to first token is what users feel. Total time barely matters if text starts appearing in under a second. Here’s <a href="../stream-llm-responses-react-native-sse/">how I stream LLM responses into React Native</a>.</li>
+  <li><b>Measure TTFT and tokens per second separately</b>A slow first token points at long prompts or queueing. Slow streaming points at model size or a busy provider. The <a href="https://arxiv.org/html/2407.07000">Etalon paper</a> is a good reference for these serving metrics.</li>
+  <li><b>Keep your prompt prefix stable</b>Put the system prompt, tools and fixed instructions first and the user’s message last. Providers with prompt caching, and engines with prefix reuse like <a href="https://arxiv.org/html/2312.07104">SGLang</a>, can then skip prefill for the part that repeats.</li>
+  <li><b>Ask for fewer output tokens</b>Each output token is one decode step, and decode is the slow, sequential part. A structured JSON answer with the three fields you need beats a friendly paragraph.</li>
+  <li><b>Use small models for small jobs</b>On Myaigi a fast, cheap model classifies intent and routes the request; stronger models only run where quality matters.</li>
+  <li><b>Treat long context as a cost</b>A bigger prompt means a longer prefill and a bigger KV cache for the whole conversation. Retrieve the three relevant documents instead of pasting in thirty.</li>
+</ol>
+
+<h2>Where to go next</h2>
+<p>If you want to go deeper than app level, the reading order that worked for me:</p>
+<ul>
+  <li><a href="https://jax-ml.github.io/scaling-book/inference/">How to Scale Your Model: Inference</a>, for the whole request lifecycle.</li>
+  <li><a href="https://kipply.github.io/blog/transformer-inference-arithmetic/">Transformer Inference Arithmetic</a>, for the back-of-the-envelope math.</li>
+  <li><a href="https://github.com/gpu-mode/lectures">GPU Mode lectures</a>, when you want to see kernels.</li>
+  <li>The full <a href="https://github.com/wafer-ai/gpu-perf-engineering-resources">Wafer reading list</a>, which goes from a single request down to kernels and distributed serving.</li>
+</ul>
+  </div>
+  </article>
+  <div class="cta-band">
+    <h2>Building an AI feature?</h2>
+    <p>I build AI features that stay fast and affordable in production: agents, MCP servers and streamed answers in web and mobile apps.</p>
+    <div class="cta"><a class="btn" href="mailto:aleemii270@gmail.com?subject=AI%20project">Get a quote</a><a href="mailto:aleemii270@gmail.com">aleemii270@gmail.com</a></div>
+  </div>
+  <nav class="related" aria-label="More">
+    <h2>Keep reading</h2>
+    <ul class="postlist"><li><h2><a href="../stream-llm-responses-react-native-sse/">How to stream LLM responses in React Native with Server-Sent Events</a></h2><p>How to stream OpenAI or Claude responses into a React Native app with Server-Sent Events: Node server, expo/fetch client, and the bugs to avoid.</p></li><li><h2><a href="../javascript-tricks-production/">8 JavaScript tricks I use in production code, and the bugs they prevent</a></h2><p>Modern JavaScript tricks I use in Node.js, React and React Native: ??, AbortController, Promise.allSettled, structuredClone, toSorted, Object.groupBy.</p></li></ul>
+  </nav>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span class="grow"><svg class="wm" viewBox="0 0 96 44" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v16M4 22a6 6 0 0 1 12 0v10M16 22a6 6 0 0 1 12 0v10"/><circle cx="44" cy="24" r="8"/><path d="M52 16v16M60 16v18a4 4 0 0 1-4 4h-1M68 16v16"/><circle cx="84" cy="24" r="8"/><path d="M92 6v26"/></g><circle class="dot" cx="60" cy="9" r="2.6"/><circle class="dot" cx="68" cy="9" r="2.6"/></svg><span>© 2026 Majid Ali</span></span>
+    <a href="../../">Portfolio</a><a href="../../react-native-app-development/">React Native apps</a><a href="../../ai-app-development/">AI apps</a><a href="../../mvp-app-development/">Startup MVPs</a><a href="../../blog/">Articles</a><a href="../../assets/Majid_Ali_Resume.pdf">Résumé</a>
+  </div>
+</footer>
+</body>
+</html>

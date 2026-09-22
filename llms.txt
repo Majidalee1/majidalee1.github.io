@@ -1,0 +1,41 @@
+# Majid Ali (Majid Alee)
+
+> AI, React Native and backend engineer in Karachi, Pakistan (UTC+5). Technical Operations Lead at Sehat Kahani and founder of Codenetic. Open to senior AI engineering, React Native, backend and forward-deployed roles, remote or in Karachi. Contact: aleemii270@gmail.com
+
+## Work with him
+- Full-time: senior AI engineer, React Native lead or backend lead; remote or Karachi
+- Freelance and contract through Codenetic: React Native apps from scoping to App Store, backends, AI agents, MCP servers and RAG
+
+## Summary
+- 70+ apps published to the App Store and Google Play, out of 300+ built, through his consultancy Codenetic ($200K+ earned)
+- Architected Myaigi, a seven-agent LangGraph coaching platform across Claude, OpenAI and Gemini, with a QA agent gating every answer
+- Built a Model Context Protocol (MCP) server exposing a production Azure MySQL database as LLM tools
+- Cut a national telemedicine platform's Azure bill from about $12,000 to $1,500 a month (88%) with no downtime
+- Led 35+ engineers across client accounts as Senior Project Manager; led a four-person backend team on AWS EKS and Fargate
+
+## Experience
+- Technical Operations Lead, Sehat Kahani, Karachi (Jun 2024 to now)
+- Senior Project Manager, Zetsol Technologies, Hyderabad (Sep 2023 to Jun 2024)
+- Backend and DevOps Team Lead, BitsPro, Karachi (Dec 2022 to Sep 2023)
+- Full Stack Developer, then Development Team Lead, Zetsol Technologies (Mar 2021 to Dec 2022)
+- Founder, Codenetic (2021 to now)
+
+## Skills
+AI: LangGraph, LangChain, MCP, RAG, Pinecone, LLM evaluation. Mobile: React Native, Expo, EAS, offline-first sync, CallKit, TurboModules. Backend: Node.js, TypeScript, Python, Go, NATS, WebRTC. Cloud: AWS, Azure, Kubernetes, Docker, CI/CD. Data: MySQL, PostgreSQL, MongoDB, Redis, ClickHouse.
+
+## Services (pricing: $25–40/hr, projects from $3,000)
+- React Native app development: https://majidalee.dev/react-native-app-development/
+- AI app development (agents, MCP servers, RAG): https://majidalee.dev/ai-app-development/
+- MVP app development for startups: https://majidalee.dev/mvp-app-development/
+
+## Articles
+- LLM inference explained for app developers: https://majidalee.dev/blog/llm-inference-prefill-decode-kv-cache/
+- Streaming LLM responses in React Native with SSE: https://majidalee.dev/blog/stream-llm-responses-react-native-sse/
+- 8 JavaScript tricks I use in production: https://majidalee.dev/blog/javascript-tricks-production/
+
+## Links
+- Website: https://majidalee.dev/
+- Résumé: https://majidalee.dev/assets/Majid_Ali_Resume.pdf
+- LinkedIn: https://linkedin.com/in/majidalee
+- GitHub: https://github.com/Majidalee1
+- Open source: https://github.com/esengine/DeepSeek-Reasonix/pull/8198 and https://github.com/revolutionarybukhari/psx-mcp

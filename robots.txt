@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /README.md
+Disallow: /NEXT_STEPS.md
+Sitemap: https://majidalee.dev/sitemap.xml

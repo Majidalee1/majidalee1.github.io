@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8 JavaScript Tricks I Use in Production Code</title>
+<meta name="description" content="Modern JavaScript tricks I use in Node.js, React and React Native: ??, AbortController, Promise.allSettled, structuredClone, toSorted, Object.groupBy.">
+<meta name="author" content="Majid Ali">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://majidalee.dev/blog/javascript-tricks-production/">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0D10" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Majid Ali">
+<meta property="og:url" content="https://majidalee.dev/blog/javascript-tricks-production/">
+<meta property="og:title" content="8 JavaScript Tricks I Use in Production Code">
+<meta property="og:description" content="Modern JavaScript tricks I use in Node.js, React and React Native: ??, AbortController, Promise.allSettled, structuredClone, toSorted, Object.groupBy.">
+<meta property="og:image" content="https://majidalee.dev/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/site.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://majidalee.dev/blog/javascript-tricks-production/#webpage",
+   "url": "https://majidalee.dev/blog/javascript-tricks-production/",
+   "name": "8 JavaScript Tricks I Use in Production Code",
+   "description": "Modern JavaScript tricks I use in Node.js, React and React Native: ??, AbortController, Promise.allSettled, structuredClone, toSorted, Object.groupBy.",
+   "isPartOf": {
+    "@id": "https://majidalee.dev/#website"
+   },
+   "inLanguage": "en",
+   "breadcrumb": {
+    "@id": "https://majidalee.dev/blog/javascript-tricks-production/#breadcrumb"
+   },
+   "author": {
+    "@id": "https://majidalee.dev/#person"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://majidalee.dev/blog/javascript-tricks-production/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Majid Ali",
+     "item": "https://majidalee.dev/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Articles",
+     "item": "https://majidalee.dev/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "8 JavaScript Tricks I Use in Production Code",
+     "item": "https://majidalee.dev/blog/javascript-tricks-production/"
+    }
+   ]
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://majidalee.dev/blog/javascript-tricks-production/#article",
+   "headline": "8 JavaScript tricks I use in production code, and the bugs they prevent",
+   "description": "Modern JavaScript tricks I use in Node.js, React and React Native: ??, AbortController, Promise.allSettled, structuredClone, toSorted, Object.groupBy.",
+   "datePublished": "2026-09-23",
+   "dateModified": "2026-09-23",
+   "author": {
+    "@id": "https://majidalee.dev/#person",
+    "@type": "Person",
+    "name": "Majid Ali",
+    "url": "https://majidalee.dev/"
+   },
+   "publisher": {
+    "@id": "https://majidalee.dev/#person"
+   },
+   "mainEntityOfPage": {
+    "@id": "https://majidalee.dev/blog/javascript-tricks-production/#webpage"
+   },
+   "image": "https://majidalee.dev/assets/og.png",
+   "keywords": [
+    "JavaScript",
+    "JavaScript tricks",
+    "nullish coalescing",
+    "AbortController",
+    "Promise.allSettled",
+    "structuredClone",
+    "toSorted",
+    "Object.groupBy"
+   ],
+   "articleSection": "JavaScript",
+   "wordCount": 802,
+   "inLanguage": "en"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="shell">
+    <a class="home" href="../../" aria-label="Majid Ali, home"><svg class="wm" viewBox="0 0 96 44" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v16M4 22a6 6 0 0 1 12 0v10M16 22a6 6 0 0 1 12 0v10"/><circle cx="44" cy="24" r="8"/><path d="M52 16v16M60 16v18a4 4 0 0 1-4 4h-1M68 16v16"/><circle cx="84" cy="24" r="8"/><path d="M92 6v26"/></g><circle class="dot" cx="60" cy="9" r="2.6"/><circle class="dot" cx="68" cy="9" r="2.6"/></svg></a>
+    <nav aria-label="Primary">
+      <a href="../../">Portfolio</a>
+      <a class="opt" href="../../react-native-app-development/">React Native apps</a><a class="opt" href="../../ai-app-development/">AI apps</a><a class="opt" href="../../mvp-app-development/">Startup MVPs</a>
+      <a href="../../blog/">Articles</a>
+    </nav>
+    <a class="btn sm" href="mailto:aleemii270@gmail.com?subject=Hello%20from%20majidalee.dev">Contact</a>
+  </div>
+</header>
+
+<main id="main" class="page">
+  <ol class="crumbs" aria-label="Breadcrumb"><li><a href="../../">Majid Ali</a></li><li><a href="../../blog/">Articles</a></li><li aria-current="page">8 JavaScript Tricks I Use in Production Code</li></ol>
+  <article>
+  <div class="page-hero">
+    <h1>8 JavaScript tricks I use in production code, and the bugs they prevent</h1>
+    <p class="byline"><span>By <b>Majid Ali</b></span><span><time datetime="2026-09-23">23 September 2026</time></span><span>3 min read</span></p>
+    <p class="lede">These are the modern JavaScript features I reach for most in Node.js APIs, React dashboards and React Native apps. Each one replaces a pattern that quietly causes bugs.</p>
+  </div>
+  <div class="prose">
+<h2>1. <code>??</code> instead of <code>||</code> for defaults</h2>
+<pre class="hl"><code><span class="kd">const</span><span class="w"> </span><span class="nx">retries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">options</span><span class="p">.</span><span class="nx">retries</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w">   </span><span class="c1">// retries: 0 becomes 3</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">retries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">options</span><span class="p">.</span><span class="nx">retries</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0 stays 0</span></code></pre>
+<p><code>||</code> falls back on anything falsy: <code>0</code>, <code>''</code>, <code>false</code>. <code>??</code> only falls back on <code>null</code> and <code>undefined</code>. Every config value where zero or an empty string is a valid choice needs <code>??</code>.</p>
+
+<h2>2. <code>??=</code> to cache a promise, not a result</h2>
+<pre class="hl"><code><span class="kd">const</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">id</span><span class="p">))</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">fetchUser</span><span class="p">(</span><span class="nx">id</span><span class="p">));</span><span class="w"> </span><span class="c1">// store the promise</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// or, with a plain object:</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">pending</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">getPlan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">pending</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span><span class="w"> </span><span class="o">??=</span><span class="w"> </span><span class="nx">fetchPlan</span><span class="p">(</span><span class="nx">id</span><span class="p">));</span></code></pre>
+<p>If you cache the awaited result, two calls that arrive at the same time both miss the cache and both hit the database. Cache the <em>promise</em> and the second call waits on the first one. Remember to delete the entry if the promise rejects, or you’ll cache the failure.</p>
+
+<h2>3. <code>AbortController</code> for requests that went stale</h2>
+<pre class="hl"><code><span class="kd">let</span><span class="w"> </span><span class="nx">controller</span><span class="p">;</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">search</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">controller</span><span class="o">?</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span><span class="w">                 </span><span class="c1">// cancel the previous request</span>
+<span class="w">  </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/search?q=</span><span class="si">${</span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="kt">controller.signal</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span></code></pre>
+<p>Without this, a search box shows whichever response arrives last, which isn’t always the latest query. Aborting also frees the connection. For timeouts, <code>AbortSignal.timeout(5000)</code> works in modern browsers and Node.js, and <code>AbortSignal.any([a, b])</code> combines a timeout with a user cancel.</p>
+
+<h2>4. <code>Promise.allSettled</code> when one failure shouldn’t sink the page</h2>
+<pre class="hl"><code><span class="kd">const</span><span class="w"> </span><span class="nx">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">allSettled</span><span class="p">([</span><span class="nx">getStats</span><span class="p">(),</span><span class="w"> </span><span class="nx">getOrders</span><span class="p">(),</span><span class="w"> </span><span class="nx">getAlerts</span><span class="p">()]);</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">stats</span><span class="p">,</span><span class="w"> </span><span class="nx">orders</span><span class="p">,</span><span class="w"> </span><span class="nx">alerts</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">results</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'fulfilled'</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">r.value</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="p">));</span></code></pre>
+<p><code>Promise.all</code> rejects as soon as one call fails, and a dashboard with three widgets goes blank because one of them timed out. With <code>allSettled</code> each widget handles its own error state.</p>
+
+<h2>5. <code>structuredClone</code> for real deep copies</h2>
+<pre class="hl"><code><span class="kd">const</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">state</span><span class="p">));</span><span class="w"> </span><span class="c1">// Dates become strings, Maps become {}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">structuredClone</span><span class="p">(</span><span class="nx">state</span><span class="p">);</span><span class="w">            </span><span class="c1">// Dates, Maps, Sets and cycles survive</span></code></pre>
+<p>The JSON round trip turns <code>Date</code> objects into strings, drops <code>undefined</code>, and throws on circular references. <code>structuredClone</code> handles all of those. It can’t copy functions or class instances’ prototypes, and it isn’t available in every JavaScript runtime, so check your target before relying on it in React Native.</p>
+
+<h2>6. <code>toSorted()</code> so React state isn’t mutated</h2>
+<pre class="hl"><code><span class="kd">const</span><span class="w"> </span><span class="nx">sorted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">byPrice</span><span class="p">);</span><span class="w">      </span><span class="c1">// sorts items in place: state mutated</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sorted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">toSorted</span><span class="p">(</span><span class="nx">byPrice</span><span class="p">);</span><span class="w">  </span><span class="c1">// returns a new array</span></code></pre>
+<p><code>sort()</code> changes the original array. In React that’s a mutated state object, which leads to renders that don’t happen or happen with the wrong data. <code>toSorted</code>, <code>toReversed</code> and <code>toSpliced</code> (ES2023) return new arrays instead. While you’re there: <code>items.at(-1)</code> reads the last item without <code>items[items.length - 1]</code>.</p>
+
+<h2>7. <code>Object.groupBy</code> instead of a hand-written reduce</h2>
+<pre class="hl"><code><span class="kd">const</span><span class="w"> </span><span class="nx">byStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">groupBy</span><span class="p">(</span><span class="nx">orders</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">order</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">order</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+<span class="c1">// { paid: [...], pending: [...], refunded: [...] }</span></code></pre>
+<p>This replaces the <code>reduce</code> everyone writes slightly differently. It’s ES2024: Node.js 21 and later and current browsers. The result has no prototype, so use <code>Object.hasOwn(byStatus, 'paid')</code> or <code>'paid' in byStatus</code> rather than calling methods on it.</p>
+
+<h2>8. <code>Intl</code> instead of a formatting library</h2>
+<pre class="hl"><code><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">NumberFormat</span><span class="p">(</span><span class="s1">'en-US'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="s1">'currency'</span><span class="p">,</span><span class="w"> </span><span class="nx">currency</span><span class="o">:</span><span class="w"> </span><span class="s1">'USD'</span><span class="w"> </span><span class="p">}).</span><span class="nx">format</span><span class="p">(</span><span class="mf">1500</span><span class="p">);</span>
+<span class="c1">// "$1,500.00"</span>
+
+<span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">RelativeTimeFormat</span><span class="p">(</span><span class="s1">'en'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">numeric</span><span class="o">:</span><span class="w"> </span><span class="s1">'auto'</span><span class="w"> </span><span class="p">}).</span><span class="nx">format</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'day'</span><span class="p">);</span>
+<span class="c1">// "yesterday"</span></code></pre>
+<p>Prices, percentages, dates and “3 hours ago” are built in, and they handle locales you’d never think to test. Create the formatter once and reuse it; constructing one inside a render loop is slow.</p>
+
+<h2>Where each one works</h2>
+<table>
+  <thead><tr><th>Feature</th><th>Standard</th><th>Node.js</th></tr></thead>
+  <tbody>
+    <tr><td><code>??</code></td><td>ES2020</td><td>14+</td></tr>
+    <tr><td><code>??=</code></td><td>ES2021</td><td>15+</td></tr>
+    <tr><td><code>AbortController</code></td><td>Web API</td><td>15+</td></tr>
+    <tr><td><code>Promise.allSettled</code></td><td>ES2020</td><td>12.9+</td></tr>
+    <tr><td><code>structuredClone</code></td><td>Web API</td><td>17+</td></tr>
+    <tr><td><code>toSorted</code></td><td>ES2023</td><td>20+</td></tr>
+    <tr><td><code>Object.groupBy</code></td><td>ES2024</td><td>21+</td></tr>
+  </tbody>
+</table>
+<p>In the browser, all of these work in current Chrome, Firefox and Safari. In React Native, support depends on your Hermes version, so check before you ship.</p>
+<p>If you stream AI responses in a React Native app, the <code>AbortController</code> pattern above is exactly how you stop a model call when the user leaves the screen; I use it in <a href="../stream-llm-responses-react-native-sse/">streaming LLM responses to React Native</a>.</p>
+  </div>
+  </article>
+  <div class="cta-band">
+    <h2>Need a senior JavaScript engineer?</h2>
+    <p>I build Node.js backends, React dashboards and React Native apps. Tell me what you’re working on.</p>
+    <div class="cta"><a class="btn" href="mailto:aleemii270@gmail.com?subject=Project%20enquiry">Get a quote</a><a href="mailto:aleemii270@gmail.com">aleemii270@gmail.com</a></div>
+  </div>
+  <nav class="related" aria-label="More">
+    <h2>Keep reading</h2>
+    <ul class="postlist"><li><h2><a href="../llm-inference-prefill-decode-kv-cache/">LLM inference explained for app developers: prefill, decode and the KV cache</a></h2><p>Why AI features feel slow: prefill, decode, the KV cache, TTFT and tokens per second explained for app developers, with the math and what to change.</p></li><li><h2><a href="../stream-llm-responses-react-native-sse/">How to stream LLM responses in React Native with Server-Sent Events</a></h2><p>How to stream OpenAI or Claude responses into a React Native app with Server-Sent Events: Node server, expo/fetch client, and the bugs to avoid.</p></li></ul>
+  </nav>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span class="grow"><svg class="wm" viewBox="0 0 96 44" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v16M4 22a6 6 0 0 1 12 0v10M16 22a6 6 0 0 1 12 0v10"/><circle cx="44" cy="24" r="8"/><path d="M52 16v16M60 16v18a4 4 0 0 1-4 4h-1M68 16v16"/><circle cx="84" cy="24" r="8"/><path d="M92 6v26"/></g><circle class="dot" cx="60" cy="9" r="2.6"/><circle class="dot" cx="68" cy="9" r="2.6"/></svg><span>© 2026 Majid Ali</span></span>
+    <a href="../../">Portfolio</a><a href="../../react-native-app-development/">React Native apps</a><a href="../../ai-app-development/">AI apps</a><a href="../../mvp-app-development/">Startup MVPs</a><a href="../../blog/">Articles</a><a href="../../assets/Majid_Ali_Resume.pdf">Résumé</a>
+  </div>
+</footer>
+</body>
+</html>

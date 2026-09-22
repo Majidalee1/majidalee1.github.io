@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stream LLM Responses in React Native with Server-Sent Events</title>
+<meta name="description" content="How to stream OpenAI or Claude responses into a React Native app with Server-Sent Events: Node server, expo/fetch client, and the bugs to avoid.">
+<meta name="author" content="Majid Ali">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://majidalee.dev/blog/stream-llm-responses-react-native-sse/">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0D10" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Majid Ali">
+<meta property="og:url" content="https://majidalee.dev/blog/stream-llm-responses-react-native-sse/">
+<meta property="og:title" content="Stream LLM Responses in React Native with Server-Sent Events">
+<meta property="og:description" content="How to stream OpenAI or Claude responses into a React Native app with Server-Sent Events: Node server, expo/fetch client, and the bugs to avoid.">
+<meta property="og:image" content="https://majidalee.dev/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="preload" href="../../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/site.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/#webpage",
+   "url": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/",
+   "name": "Stream LLM Responses in React Native with Server-Sent Events",
+   "description": "How to stream OpenAI or Claude responses into a React Native app with Server-Sent Events: Node server, expo/fetch client, and the bugs to avoid.",
+   "isPartOf": {
+    "@id": "https://majidalee.dev/#website"
+   },
+   "inLanguage": "en",
+   "breadcrumb": {
+    "@id": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/#breadcrumb"
+   },
+   "author": {
+    "@id": "https://majidalee.dev/#person"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Majid Ali",
+     "item": "https://majidalee.dev/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Articles",
+     "item": "https://majidalee.dev/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Stream LLM Responses in React Native with Server-Sent Events",
+     "item": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/"
+    }
+   ]
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/#article",
+   "headline": "How to stream LLM responses in React Native with Server-Sent Events",
+   "description": "How to stream OpenAI or Claude responses into a React Native app with Server-Sent Events: Node server, expo/fetch client, and the bugs to avoid.",
+   "datePublished": "2026-09-23",
+   "dateModified": "2026-09-23",
+   "author": {
+    "@id": "https://majidalee.dev/#person",
+    "@type": "Person",
+    "name": "Majid Ali",
+    "url": "https://majidalee.dev/"
+   },
+   "publisher": {
+    "@id": "https://majidalee.dev/#person"
+   },
+   "mainEntityOfPage": {
+    "@id": "https://majidalee.dev/blog/stream-llm-responses-react-native-sse/#webpage"
+   },
+   "image": "https://majidalee.dev/assets/og.png",
+   "keywords": [
+    "React Native",
+    "Server-Sent Events",
+    "SSE",
+    "streaming",
+    "LLM",
+    "OpenAI",
+    "Expo",
+    "expo/fetch"
+   ],
+   "articleSection": "React Native",
+   "wordCount": 1239,
+   "inLanguage": "en"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="shell">
+    <a class="home" href="../../" aria-label="Majid Ali, home"><svg class="wm" viewBox="0 0 96 44" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v16M4 22a6 6 0 0 1 12 0v10M16 22a6 6 0 0 1 12 0v10"/><circle cx="44" cy="24" r="8"/><path d="M52 16v16M60 16v18a4 4 0 0 1-4 4h-1M68 16v16"/><circle cx="84" cy="24" r="8"/><path d="M92 6v26"/></g><circle class="dot" cx="60" cy="9" r="2.6"/><circle class="dot" cx="68" cy="9" r="2.6"/></svg></a>
+    <nav aria-label="Primary">
+      <a href="../../">Portfolio</a>
+      <a class="opt" href="../../react-native-app-development/">React Native apps</a><a class="opt" href="../../ai-app-development/">AI apps</a><a class="opt" href="../../mvp-app-development/">Startup MVPs</a>
+      <a href="../../blog/">Articles</a>
+    </nav>
+    <a class="btn sm" href="mailto:aleemii270@gmail.com?subject=Hello%20from%20majidalee.dev">Contact</a>
+  </div>
+</header>
+
+<main id="main" class="page">
+  <ol class="crumbs" aria-label="Breadcrumb"><li><a href="../../">Majid Ali</a></li><li><a href="../../blog/">Articles</a></li><li aria-current="page">Stream LLM Responses in React Native with Server-Sent Events</li></ol>
+  <article>
+  <div class="page-hero">
+    <h1>How to stream LLM responses in React Native with Server-Sent Events</h1>
+    <p class="byline"><span>By <b>Majid Ali</b></span><span><time datetime="2026-09-23">23 September 2026</time></span><span>5 min read</span></p>
+    <p class="lede">A chat screen that shows a spinner for eight seconds feels broken. The same answer streaming in word by word feels fast. Here’s the setup I use: a Node.js server, Server-Sent Events, and a React Native client that renders tokens without dropping frames.</p>
+  </div>
+  <div class="prose">
+<div class="answer"><strong>The short version</strong>Call the model from your server, never from the app. Send tokens to the app as <b>Server-Sent Events</b> (<code>text/event-stream</code>). In the app, read the response body as a stream: Expo SDK 52 and later ship a streaming <code>fetch</code> in <code>expo/fetch</code>. Buffer incoming text and update the UI on a short timer instead of on every token.</div>
+
+<p>On Myaigi, a coaching app with seven AI agents behind it, one answer can involve several model calls in a row. Total latency is the sum of all of them. We stream every answer to the React Native client, because users judge speed by whether text is moving, not by the total.</p>
+<p>We picked Server-Sent Events over WebSockets for a simple reason: the traffic goes one way. The server talks; the app listens. SSE is plain HTTP, works with normal API servers and load balancers, and needs no extra protocol.</p>
+
+<h2>Why the app shouldn’t call the model directly</h2>
+<p>Anything shipped in an app bundle can be extracted. Put an OpenAI or Anthropic key in your React Native code and assume someone will find it. Your server holds the key, checks who’s asking, applies rate limits, and streams the result back.</p>
+
+<h2>Step 1: the server</h2>
+<p>A minimal Express endpoint. The model call is wrapped in an async generator so you can swap providers without touching the HTTP code.</p>
+<pre class="hl"><code><span class="k">import</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'express'</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">OpenAI</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'openai'</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">openai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenAI</span><span class="p">();</span><span class="w"> </span><span class="c1">// reads OPENAI_API_KEY</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="o">*</span><span class="w"> </span><span class="nx">streamModel</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">chat</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.MODEL</span><span class="p">,</span><span class="w"> </span><span class="nx">messages</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">'user'</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="kt">message</span><span class="w"> </span><span class="p">}],</span><span class="w"> </span><span class="nx">stream</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">stream</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">chunk</span><span class="p">.</span><span class="nx">choices</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="nx">delta</span><span class="o">?</span><span class="p">.</span><span class="nx">content</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="nx">text</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/chat'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+<span class="w">    </span><span class="s1">'Content-Type'</span><span class="o">:</span><span class="w"> </span><span class="s1">'text/event-stream'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'Cache-Control'</span><span class="o">:</span><span class="w"> </span><span class="s1">'no-cache'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Connection</span><span class="o">:</span><span class="w"> </span><span class="s1">'keep-alive'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'X-Accel-Buffering'</span><span class="o">:</span><span class="w"> </span><span class="s1">'no'</span><span class="p">,</span><span class="w"> </span><span class="c1">// tell nginx not to buffer</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">flushHeaders</span><span class="p">();</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'close'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">());</span><span class="w"> </span><span class="c1">// user left: stop paying for tokens</span>
+
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">streamModel</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="sb">`data: </span><span class="si">${</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="si">}</span><span class="sb">)}\n\n`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'event: done\ndata: {}\n\n'</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">aborted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="sb">`event: error\ndata: </span><span class="si">${</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s1">'stream failed'</span><span class="w"> </span><span class="si">}</span><span class="sb">)}\n\n`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span></code></pre>
+<p>Each event is a <code>data:</code> line followed by a blank line. That blank line is the whole protocol; forget it and the client never sees a complete event.</p>
+
+<h2>Step 2: the React Native client</h2>
+<p>React Native’s built-in <code>fetch</code> doesn’t give you a readable stream. Expo’s <code>expo/fetch</code> does (SDK 52 and later), which means you can read the body chunk by chunk:</p>
+<pre class="hl"><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'expo/fetch'</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">streamChat</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">onText</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="kt">AbortSignal</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/chat`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">'POST'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">'Content-Type'</span><span class="o">:</span><span class="w"> </span><span class="s1">'application/json'</span><span class="p">,</span><span class="w"> </span><span class="nx">Accept</span><span class="o">:</span><span class="w"> </span><span class="s1">'text/event-stream'</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">JSON.stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">signal</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`HTTP </span><span class="si">${</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">getReader</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">decoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TextDecoder</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">done</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">reader</span><span class="p">.</span><span class="nx">read</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">buffer</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">decoder</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">stream</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">buffer</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'\n\n'</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">events</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">''</span><span class="p">;</span><span class="w"> </span><span class="c1">// keep the half-received event for next time</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">event</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">events</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'event: done'</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">).</span><span class="nx">find</span><span class="p">((</span><span class="nx">line</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">line</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'data: '</span><span class="p">));</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">onText</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">6</span><span class="p">)).</span><span class="nx">text</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre>
+<p>On a bare React Native project without Expo’s runtime, use an EventSource implementation such as <code>react-native-sse</code>, or add polyfills for streaming fetch and <code>TextDecoder</code>.</p>
+
+<h2>Step 3: render without dropping frames</h2>
+<p>Models can send dozens of tokens a second. Calling <code>setState</code> for each one re-renders the message list dozens of times a second, and on a mid-range Android phone you’ll feel it. Collect text in a ref and flush it on a timer instead:</p>
+<pre class="hl"><code><span class="kd">function</span><span class="w"> </span><span class="nx">useStreamedAnswer</span><span class="p">(</span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">setText</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">pending</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRef</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setInterval</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">pending</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pending</span><span class="p">.</span><span class="nx">current</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">pending</span><span class="p">.</span><span class="nx">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">setText</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">chunk</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">streamChat</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">pending</span><span class="p">.</span><span class="nx">current</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">t</span><span class="p">;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="k">catch</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* show a retry button */</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span><span class="w"> </span><span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">message</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">text</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
+<p>Aborting on unmount matters twice: the app stops downloading, and because the server listens for <code>close</code>, it stops the model call too. You stop paying for an answer nobody will read.</p>
+
+<h2>Bugs that will bite you</h2>
+<ul>
+  <li><b>A proxy buffers the whole response.</b> Everything arrives at once at the end. Nginx buffers by default (hence <code>X-Accel-Buffering: no</code>), and Express <code>compression</code> middleware does too unless you exclude the route or flush after each write.</li>
+  <li><b>Using <code>req.on('close')</code> to detect disconnects.</b> In current Node.js it can fire as soon as the request body has been read, which aborts every stream immediately. Listen on the response: <code>res.on('close')</code>.</li>
+  <li><b>Parsing chunks as if they were events.</b> A network chunk can end halfway through an event. Keep the leftover in a buffer, as in the client above.</li>
+  <li><b>Idle connections get cut.</b> Load balancers close quiet connections (AWS’s Application Load Balancer defaults to 60 seconds). If a model thinks for a while before answering, send a comment line like <code>: ping</code> every 15 seconds.</li>
+  <li><b><code>localhost</code> on the Android emulator</b> is the emulator itself. Use <code>10.0.2.2</code> to reach your machine.</li>
+</ul>
+
+<h2>Why streaming works so well</h2>
+<p>The first token arrives after the model reads your prompt (prefill). Everything after that comes one token per step (decode). Streaming turns the long, sequential part into something the user watches rather than waits for. I go into why that split exists in <a href="../llm-inference-prefill-decode-kv-cache/">LLM inference explained for app developers</a>.</p>
+  </div>
+  </article>
+  <div class="cta-band">
+    <h2>Adding AI to a React Native app?</h2>
+    <p>I build React Native apps and the AI backends behind them, with answers that stream in instead of spinning.</p>
+    <div class="cta"><a class="btn" href="mailto:aleemii270@gmail.com?subject=React%20Native%20project">Get a quote</a><a href="mailto:aleemii270@gmail.com">aleemii270@gmail.com</a></div>
+  </div>
+  <nav class="related" aria-label="More">
+    <h2>Keep reading</h2>
+    <ul class="postlist"><li><h2><a href="../llm-inference-prefill-decode-kv-cache/">LLM inference explained for app developers: prefill, decode and the KV cache</a></h2><p>Why AI features feel slow: prefill, decode, the KV cache, TTFT and tokens per second explained for app developers, with the math and what to change.</p></li><li><h2><a href="../javascript-tricks-production/">8 JavaScript tricks I use in production code, and the bugs they prevent</a></h2><p>Modern JavaScript tricks I use in Node.js, React and React Native: ??, AbortController, Promise.allSettled, structuredClone, toSorted, Object.groupBy.</p></li></ul>
+  </nav>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span class="grow"><svg class="wm" viewBox="0 0 96 44" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v16M4 22a6 6 0 0 1 12 0v10M16 22a6 6 0 0 1 12 0v10"/><circle cx="44" cy="24" r="8"/><path d="M52 16v16M60 16v18a4 4 0 0 1-4 4h-1M68 16v16"/><circle cx="84" cy="24" r="8"/><path d="M92 6v26"/></g><circle class="dot" cx="60" cy="9" r="2.6"/><circle class="dot" cx="68" cy="9" r="2.6"/></svg><span>© 2026 Majid Ali</span></span>
+    <a href="../../">Portfolio</a><a href="../../react-native-app-development/">React Native apps</a><a href="../../ai-app-development/">AI apps</a><a href="../../mvp-app-development/">Startup MVPs</a><a href="../../blog/">Articles</a><a href="../../assets/Majid_Ali_Resume.pdf">Résumé</a>
+  </div>
+</footer>
+</body>
+</html>
