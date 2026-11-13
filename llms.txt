@@ -35,7 +35,8 @@ AI: LangGraph, LangChain, MCP, RAG, Pinecone, LLM evaluation. Mobile: React Nati
 
 ## Links
 - Website: https://majidalee.dev/
-- Résumé: https://majidalee.dev/assets/Majid_Ali_Resume.pdf
+- Résumés by role (React Native, AI & LLM, Forward Deployed, Full Stack, MERN, Backend, NestJS, DevOps, Data): https://majidalee.dev/resumes/
+- General résumé: https://majidalee.dev/assets/Majid_Ali_Resume.pdf
 - LinkedIn: https://linkedin.com/in/majidalee
 - GitHub: https://github.com/Majidalee1
 - Open source: https://github.com/esengine/DeepSeek-Reasonix/pull/8198 and https://github.com/revolutionarybukhari/psx-mcp
